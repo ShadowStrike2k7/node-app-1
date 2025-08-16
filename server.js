@@ -85,6 +85,10 @@ app.get("/logout",(req,res) => {
     res.redirect("/")
 })
 
+app.get("/testing",(req,res) => {
+    res.send("Testing")
+})
+
 app.get("/create-post",checkLogin,(req,res) => {
     res.render("create-post")
 })
