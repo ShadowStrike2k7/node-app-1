@@ -1,0 +1,12 @@
+<header>
+        <h2><a href="/">First Backend App</a></h2> 
+        <p><a href="/">To learn to buld an api server</a></p>
+        <nav>
+            <% if(user){ %>
+                <a href="/create-post">Create post</a>
+                <a href="/logout">Logout</a>
+            <% }else{ %>
+                <a href="/login">Log in</a>
+            <% } %>
+        </nav>
+</header>
