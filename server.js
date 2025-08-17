@@ -52,7 +52,9 @@ app.use(function (req,res,next){
     try {
         const decoded = jwt.verify(req.cookies.Oursimpleapp, process.env.JWTSECRET)
         req.user = decoded
+        console.log("cookie verifies")
     } catch (error) {
+        console.log("came to catch",error.message)
         req.user = false
     }
     res.locals.user = req.user
@@ -220,9 +222,9 @@ app.post("/register",(req,res) =>{
     const tokenVal = jwt.sign({exp: Math.floor(Date.now()/1000) + 60 * 60 * 24 ,userid: getUser.id, username: getUser.username},process.env.JWTSECRET)
     res.cookie("Oursimpleapp",tokenVal,{
         httpOnly:true,
-        secure:true,
-        sameSite: "strict",
-        maxAge: 1000 * 60 * 60 * 48
+        secure:process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 1000 + 60 * 60 * 48
     })
     res.redirect("/")
 })
